@@ -3,8 +3,16 @@ using UnityEngine.UI;
 public class RadialLayout : LayoutGroup
 { 
     public float fDistance;
+    
     [Range(0f,360f)]
-    public float MinAngle, MaxAngle, StartAngle; 
+    public float minAngle;
+    
+    [Range(0f,360f)]
+    public float maxAngle;
+    
+    [Range(-360f,360f)]
+    public float startAngle;
+
     protected override void OnEnable() 
     { base.OnEnable(); CalculateRadial(); }
     
@@ -33,9 +41,9 @@ public class RadialLayout : LayoutGroup
         m_Tracker.Clear();
         if (transform.childCount == 0) return;
 
-        var fOffsetAngle = (MaxAngle - MinAngle) / (transform.childCount -1);
+        var fOffsetAngle = (maxAngle - minAngle) / (transform.childCount -1);
 
-        var fAngle = StartAngle;
+        var fAngle = startAngle;
         for (int i = 0; i < transform.childCount; i++)
         {
             var child = (RectTransform)transform.GetChild(i);
